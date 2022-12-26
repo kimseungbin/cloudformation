@@ -9,3 +9,5 @@ Parameters:
     Type: String
     AllowedValues: [ prod, test ]
     Default: prod
+Conditions:
+  ProdEnv: !Equals [ !Ref Environment, prod ]
