@@ -14,3 +14,6 @@ Resources:
               - sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AdministratorAccess
+  TemplateBucket:
+    Type: AWS::S3::Bucket
+    Description: The S3 bucket used for storing the artifact for a pipeline.
