@@ -80,3 +80,31 @@ Resources:
           - Name: CFN_ROLE
             Type: PLAINTEXT
             Value: !GetAtt CfnRole.Arn
+  PipelineRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codepipeline.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: CodePipeline
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - codecommit:CancelUploadArchive
+                  - codecommit:GetBranch
+                  - codecommit:GetCommit
+                  - codecommit:GetUploadArchiveStatus
+                  - codecommit:UploadArchive
+                  - codebuild:BatchGetBuilds
+                  - codebuild:StartBuild
+                  - cloudwatch:*
+                  - s3:*
+                  - iam:PassRole
+                Resource: '*'
