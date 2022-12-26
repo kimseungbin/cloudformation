@@ -108,3 +108,63 @@ Resources:
                   - s3:*
                   - iam:PassRole
                 Resource: '*'
+  Pipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      RoleArn: !GetAtt PipelineRole.Arn
+      ArtifactStore:
+        Location: !Ref TemplateBucket
+        Type: S3
+      Name: Core
+      Stages:
+        - Name: Clone
+          Actions:
+            - Name: Clone
+              ActionTypeId:
+                Category: Source
+                Owner: AWS
+                Provider: CodeCommit
+                Version: "1"
+              OutputArtifacts:
+                - Name: CloneOutput
+              Configuration:
+                BranchName: main
+                RepositoryName: !GetAtt Repository.Name
+              RunOrder: 1
+        - Name: Build
+          Actions:
+            - Name: Build
+              InputArtifacts:
+                - Name: CloneOutput
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: "1"
+              OutputArtifacts:
+                - Name: BuildOutput
+              Configuration:
+                ProjectName: !Ref Build
+              RunOrder: 1
+        - Name: Deploy
+          Actions:
+            - Name: Deploy
+              InputArtifacts:
+                - Name: BuildOutput
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Provider: CloudFormation
+                Version: "1"
+              OutputArtifacts:
+                - Name: DeployOutput
+              # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html
+              Configuration:
+                ActionMode: CREATE_UPDATE
+                RoleArn: !GetAtt CfnRole.Arn
+                # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html
+                # For stacks that contain certain resources, explicit acknowledgement that AWS CloudFormation might create or update those resources.
+                # https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html
+                Capabilities: CAPABILITY_NAMED_IAM
+                StackName: Core
+                TemplatePath: BuildOutput::core.yaml
