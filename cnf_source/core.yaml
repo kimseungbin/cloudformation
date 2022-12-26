@@ -24,3 +24,63 @@ Resources:
           Value: !Join
             - "-"
             - [ !Ref Environment, vpc ]
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Select
+        - 0
+        - !Cidr [ !Ref VpcCidr, 12, 8 ]
+      VpcId: !Ref Vpc
+      MapPublicIpOnLaunch: true
+      AvailabilityZone: !Select
+        - 0
+        - Fn::GetAZs: !Ref AWS::Region
+      Tags:
+        - Key: Name
+          Value: !Join
+            - "-"
+            - [ !Ref Environment, public-subnet01 ]
+        - Key: Env
+          Value: !Ref Environment
+        - Key: Private
+          Value: false
+  PublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Select
+        - 1
+        - !Cidr [ !Ref VpcCidr, 12, 8 ]
+      VpcId: !Ref Vpc
+      MapPublicIpOnLaunch: true
+      AvailabilityZone: !Select
+        - 1
+        - Fn::GetAZs: !Ref AWS::Region
+      Tags:
+        - Key: Name
+          Value: !Join
+            - "-"
+            - [ !Ref Environment, public-subnet02 ]
+        - Key: Env
+          Value: !Ref Environment
+        - Key: Private
+          Value: false
+  PublicSubnet3:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Select
+        - 2
+        - !Cidr [ !Ref VpcCidr, 12, 8 ]
+      VpcId: !Ref Vpc
+      MapPublicIpOnLaunch: true
+      AvailabilityZone: !Select
+        - 2
+        - Fn::GetAZs: !Ref AWS::Region
+      Tags:
+        - Key: Name
+          Value: !Join
+            - "-"
+            - [ !Ref Environment, public-subnet03 ]
+        - Key: Env
+          Value: !Ref Environment
+        - Key: Private
+          Value: false
