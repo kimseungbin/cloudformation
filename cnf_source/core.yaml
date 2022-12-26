@@ -11,3 +11,16 @@ Parameters:
     Default: prod
 Conditions:
   ProdEnv: !Equals [ !Ref Environment, prod ]
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCidr
+      # Indicates whether the instances launched in the VPC get DNS hostnames.
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: !Join
+            - "-"
+            - [ !Ref Environment, vpc ]
