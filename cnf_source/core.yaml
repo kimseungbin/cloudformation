@@ -142,3 +142,60 @@ Resources:
           Value: !Ref Environment
         - Key: Private
           Value: true
+  MiddlewareSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Select
+        - 6
+        - !Cidr [ !Ref VpcCidr, 12, 8 ]
+      VpcId: !Ref Vpc
+      AvailabilityZone: !Select
+        - 0
+        - Fn::GetAZs: !Ref AWS::Region
+      Tags:
+        - Key: Name
+          Value: !Join
+            - "-"
+            - [ !Ref Environment, middleware-subnet01 ]
+        - Key: Env
+          Value: !Ref Environment
+        - Key: Private
+          Value: true
+  MiddlewareSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Select
+        - 7
+        - !Cidr [ !Ref VpcCidr, 12, 8 ]
+      VpcId: !Ref Vpc
+      AvailabilityZone: !Select
+        - 1
+        - Fn::GetAZs: !Ref AWS::Region
+      Tags:
+        - Key: Name
+          Value: !Join
+            - "-"
+            - [ !Ref Environment, middleware-subnet02 ]
+        - Key: Env
+          Value: !Ref Environment
+        - Key: Private
+          Value: true
+  MiddlewareSubnet3:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Select
+        - 8
+        - !Cidr [ !Ref VpcCidr, 12, 8 ]
+      VpcId: !Ref Vpc
+      AvailabilityZone: !Select
+        - 2
+        - Fn::GetAZs: !Ref AWS::Region
+      Tags:
+        - Key: Name
+        - Value: !Join
+            - "-"
+            - [ !Ref Environment, middleware-subnet03 ]
+        - Key: Env
+          Value: !Ref Environment
+        - Key: Private
+          Value: true
