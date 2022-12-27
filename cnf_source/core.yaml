@@ -263,3 +263,15 @@ Resources:
     Properties:
       InternetGatewayId: !Ref Igw
       VpcId: !Ref Vpc
+  NatEip:
+    Type: AWS::EC2::EIP
+  NatGw:
+    # https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
+    # A NAT gateway is a Network Address Translation service.
+    # You can use a NAT gateway so that instances in a private subnet can connect to services outside your VPC
+    # but external services cannot initiate a connection with those instances.
+    # https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-natgateway.html
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatEip.AllocationId
+      SubnetId: !Ref PublicSubnet1
