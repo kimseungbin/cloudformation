@@ -256,3 +256,10 @@ Resources:
           Value: !Ref Environment
         - Key: Private
           Value: true
+  Igw:
+    Type: AWS::EC2::InternetGateway
+  IgwToVpcAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref Igw
+      VpcId: !Ref Vpc
