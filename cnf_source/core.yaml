@@ -192,10 +192,10 @@ Resources:
         - Fn::GetAZs: !Ref AWS::Region
       Tags:
         - Key: Name
-        - Value: !Join
+          Value: !Join
             - "-"
             - [ !Ref Environment, middleware-subnet03 ]
-        - Key: Env
+        - Key: Name
           Value: !Ref Environment
         - Key: Private
           Value: true
