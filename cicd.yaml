@@ -105,6 +105,7 @@ Resources:
                   - codebuild:BatchGetBuilds
                   - codebuild:StartBuild
                   - cloudwatch:*
+                  - cloudformation:*
                   - s3:*
                   - iam:PassRole
                 Resource: '*'
