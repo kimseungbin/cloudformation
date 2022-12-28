@@ -118,6 +118,8 @@ Resources:
         Type: S3
       Name: Core
       Stages:
+        # https://github.com/symphoniacloud/github-codepipeline/blob/master/pipeline.yaml
+        # ThirdParty Source
         - Name: Clone
           Actions:
             - Name: Clone
