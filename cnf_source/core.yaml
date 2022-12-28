@@ -417,4 +417,4 @@ Resources:
     Type: AWS::SSM::Parameter
     Properties:
       Type: String
-      Value: 1
+      Value: "1"
