@@ -16,5 +16,4 @@ phases:
       - aws cloudformation delete-stack --stack-name core-tmp --role-arn $CFN_ROLE
 artifacts:
   files:
-    - packaged-root-template.yaml
-    - config-*.json
+    - core.yaml
