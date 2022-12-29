@@ -11,6 +11,10 @@ Parameters:
   GitHubRepo:
     Type: String
     Description: The name of the repository. e.g. https://github.com/[GitHubRepo]
+  GitHubBranch:
+    Type: String
+    Description: The branch to pull.
+    Default: main
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
@@ -23,6 +27,7 @@ Metadata:
         Parameters:
           - GitHubOwner
           - GitHubRepo
+          - GitHubBranch
 Resources:
   CfnRole:
     Type: AWS::IAM::Role
@@ -155,9 +160,9 @@ Resources:
               OutputArtifacts:
                 - Name: CloneOutput
               Configuration:
-                BranchName: main
                 Owner: GitHubOwner
                 Repo: !Ref GitHubRepo
+                Branch: !Ref GitHubBranch
                 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html
                 # Updating a secret in Secrets Manager doesn't automatically update the secret in CloudFormation.
                 # In order for CloudFormation to update a secretsmanager dynamic reference, you must perform a stack update that updates the resource containing the dynamic reference,
