@@ -5,6 +5,12 @@ Parameters:
     Type: String
     Description: Name of the CFN stack to deploy.
     Default: Core
+  GitHubOwner:
+    Type: String
+    Description: Either username or organization name that owns the repository.
+  GitHubRepo:
+    Type: String
+    Description: The name of the repository. e.g. https://github.com/[GitHubRepo]
 Resources:
   CfnRole:
     Type: AWS::IAM::Role
@@ -102,6 +108,7 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
+                  # todo update codecommit policies when updating pipeline to use Github
                   - codecommit:CancelUploadArchive
                   - codecommit:GetBranch
                   - codecommit:GetCommit
@@ -130,14 +137,20 @@ Resources:
             - Name: Clone
               ActionTypeId:
                 Category: Source
-                Owner: AWS
-                Provider: CodeCommit
+                Owner: ThirdParty
+                Provider: GitHub
                 Version: "1"
               OutputArtifacts:
                 - Name: CloneOutput
               Configuration:
                 BranchName: main
-                RepositoryName: !GetAtt Repository.Name
+                Owner: GitHubOwner
+                Repo: !Ref GitHubRepo
+                # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html
+                # Updating a secret in Secrets Manager doesn't automatically update the secret in CloudFormation.
+                # In order for CloudFormation to update a secretsmanager dynamic reference, you must perform a stack update that updates the resource containing the dynamic reference,
+                # either by updating the resource property that contains the secretsmanager dynamic reference, or updating another of the resource's properties.
+                OAuthToken: '{{resolve:secretsmanager:MySecrets:SecretString:GitHubOAuthToken}}'
               RunOrder: 1
         - Name: Build
           Actions:
