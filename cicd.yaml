@@ -1,5 +1,10 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: CI/CD pipeline template for DevOps
+Parameters:
+  CfnStackName:
+    Type: String
+    Description: Name of the CFN stack to deploy.
+    Default: Core
 Resources:
   CfnRole:
     Type: AWS::IAM::Role
@@ -169,5 +174,5 @@ Resources:
                 # For stacks that contain certain resources, explicit acknowledgement that AWS CloudFormation might create or update those resources.
                 # https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html
                 Capabilities: CAPABILITY_NAMED_IAM
-                StackName: Core
+                StackName: !Ref CfnStackName
                 TemplatePath: BuildOutput::core.yaml
