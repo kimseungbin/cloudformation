@@ -10,7 +10,7 @@ Parameters:
     Description: Either username or organization name that owns the repository.
   GitHubRepo:
     Type: String
-    Description: The name of the repository. e.g. https://github.com/[GitHubRepo]
+    Description: The name of the repository.
   GitHubBranch:
     Type: String
     Description: The branch to pull.
