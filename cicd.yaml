@@ -11,6 +11,18 @@ Parameters:
   GitHubRepo:
     Type: String
     Description: The name of the repository. e.g. https://github.com/[GitHubRepo]
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: General
+        Parameters:
+          - CfnStackName
+      - Label:
+          default: GitHub Configurations
+        Parameters:
+          - GitHubOwner
+          - GitHubRepo
 Resources:
   CfnRole:
     Type: AWS::IAM::Role
