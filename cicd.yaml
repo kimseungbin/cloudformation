@@ -160,7 +160,7 @@ Resources:
               OutputArtifacts:
                 - Name: CloneOutput
               Configuration:
-                Owner: GitHubOwner
+                Owner: !Ref GitHubOwner
                 Repo: !Ref GitHubRepo
                 Branch: !Ref GitHubBranch
                 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html
