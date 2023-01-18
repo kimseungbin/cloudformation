@@ -422,68 +422,68 @@ Outputs:
   VpcId:
     Value: !Ref Vpc
     Export:
-      Name: VpcId
+      Name: !Sub ${AWS::StackName}-VpcId
   PublicSubnet1Id:
     Value: !Ref PublicSubnet1
     Export:
-      Name: PublicSubnet1Id
+      Name: !Sub ${AWS::StackName}-PublicSubnet1Id
   PublicSubnet2Id:
     Value: !Ref PublicSubnet2
     Export:
-      Name: PublicSubnet2Id
+      Name: !Sub ${AWS::StackName}-PublicSubnet2Id
   PublicSubnet3Id:
     Value: !Ref PublicSubnet3
     Export:
-      Name: PublicSubnet3Id
+      Name: !Sub ${AWS::StackName}-PublicSubnet3Id
   WebTierSubnet1Id:
     Value: !Ref WebTierSubnet1
     Export:
-      Name: WebTierSubnet1Id
+      Name: !Sub ${AWS::StackName}-WebTierSubnet1Id
   WebTierSubnet2Id:
     Value: !Ref WebTierSubnet2
     Export:
-      Name: WebTierSubnet2Id
+      Name: !Sub ${AWS::StackName}-WebTierSubnet2Id
   WebTierSubnet3Id:
     Value: !Ref WebTierSubnet3
     Export:
-      Name: WebTierSubnet3Id
+      Name: !Sub ${AWS::StackName}-WebTierSubnet3Id
   MiddlewareSubnet1Id:
     Value: !Ref MiddlewareSubnet1
     Export:
-      Name: MiddlewareSubnet1Id
+      Name: !Sub ${AWS::StackName}-MiddlewareSubnet1Id
   MiddlewareSubnet2Id:
     Value: !Ref MiddlewareSubnet2
     Export:
-      Name: MiddlewareSubnet2Id
+      Name: !Sub ${AWS::StackName}-MiddlewareSubnet2Id
   MiddlewareSubnet3Id:
     Value: !Ref MiddlewareSubnet3
     Export:
-      Name: MiddlewareSubnet3Id
+      Name: !Sub ${AWS::StackName}-MiddlewareSubnet3Id
   DbSubnetGroupId:
     Value: !Ref DbSubnetGroup
     Export:
-      Name: DbSubnetGroupId
+      Name: !Sub ${AWS::StackName}-DbSubnetGroupId
   WebTierDesSizeParameter:
     Value: !Ref WebTierAsgDesSizeParameter
     Export:
-      Name: WebTierDesSizeParameter
+      Name: !Sub ${AWS::StackName}-WebTierDesSizeParameter
   WebTierMinSizeParameter:
     Value: !Ref WebTierAsgMinSizeParameter
     Export:
-      Name: WebTierMinSizeParameter
+      Name: !Sub ${AWS::StackName}-WebTierMinSizeParameter
   WebTierMaxSizeParameter:
     Value: !Ref WebTierAsgMaxSizeParameter
     Export:
-      Name: WebTierMaxSizeParameter
+      Name: !Sub ${AWS::StackName}-WebTierMaxSizeParameter
   MiddlewareDesSizeParameter:
     Value: !Ref MiddlewareAsgDesSizeParameter
     Export:
-      Name: MiddlewareDesSizeParameter
+      Name: !Sub ${AWS::StackName}-MiddlewareDesSizeParameter
   MiddlewareMinSizeParameter:
     Value: !Ref MiddlewareAsgMinSizeParameter
     Export:
-      Name: MiddlewareMinSizeParameter
+      Name: !Sub ${AWS::StackName}-MiddlewareMinSizeParameter
   MiddlewareMaxSizeParameter:
     Value: !Ref MiddlewareAsgMaxSizeParameter
     Export:
-      Name: MiddlewareMaxSizeParameter
+      Name: !Sub ${AWS::StackName}-MiddlewareMaxSizeParameter
